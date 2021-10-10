@@ -1,8 +1,8 @@
 <template>
-  <div class="main">
+  <v-app>
     <Toolbar />
     <Results />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -10,9 +10,4 @@ export default {};
 </script>
 
 <style>
-.main {
-  margin: 0 auto;
-  width: 1280px;
-  height: 100vh;
-}
 </style>
