@@ -1,12 +1,13 @@
 <template>
-  <v-main>
-    <Echo />
-  </v-main>
+  
 </template>
 
 <script>
-export default {};
+export default {
+
+}
 </script>
 
 <style>
+
 </style>
