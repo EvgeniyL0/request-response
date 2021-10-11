@@ -1,7 +1,10 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-card>
-      <v-card-text>{{ response }}</v-card-text>
+      <v-card-title>Connection log</v-card-title>
+      <v-card-text>
+        <p v-for="(item, i) in log" :key="i">{{ item }}</p>
+      </v-card-text>
     </v-card>
   </v-container>
 </template>
@@ -9,41 +12,40 @@
 <script>
 const apiKey = "EadtTPuWPdsmtw3IK6KJ3MIbNzul7R7IVFNcc3WS";
 const channelId = 1;
-const piesocket = new WebSocket(
-  `wss://free3.piesocket.com/v3/${channelId}?api_key=${apiKey}&notify_self`
-);
+const connectionState = {
+  "0": "Connecting to websocket...",
+  "1": "Connection open",
+  "2": "Closing",
+  "3": "Connection closed",
+}
 
 export default {
   data() {
     return {
-      response: ""
+      log: [],
     };
   },
   created() {
-    piesocket.onopen = function() {
-      this.response = "Websocket connected";
-      piesocket.send(
-        JSON.stringify({
-          event: "new_joining",
-          sender: "User"
-        })
-      );
-    };
-  },
-  /*async fetch() {
-    await fetch("https://www.piesocket.com/api/connections", {
-      headers: {
-        key: "EadtTPuWPdsmtw3IK6KJ3MIbNzul7R7IVFNcc3WS",
-        secret: "owJBY6nspgSBwmHy048vCcr8Rt2ZF8kR"
+    const piesocket = new WebSocket(
+      `wss://free3.piesocket.com/v3/${channelId}?api_key=${apiKey}&notify_self`
+    );
+    const boundHandleConnection = handleConnection.bind(this);
+
+    function handleConnection(e) {
+      if (e.message) {
+        this.log.push(e.message);
+      } else {
+        this.log.push(connectionState[piesocket.readyState]);
       }
-    })
-      .then(res => {
-        if (res.ok) return res.json();
-      })
-      .then(data => {
-        console.log(data);
-      });
-  }*/
+      
+    }
+
+    piesocket.onopen = boundHandleConnection;
+    piesocket.onclose = boundHandleConnection;
+    piesocket.onerror = boundHandleConnection;
+
+    this.log.push(connectionState[piesocket.readyState]);
+  },
 };
 </script>
 
