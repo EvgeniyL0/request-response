@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <Echo />
+    <component :is="$store.state.currentComponent"></component>
   </v-main>
 </template>
 
