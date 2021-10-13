@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
+      <v-col cols="12" md="6">
         <v-card min-height="400px">
           <v-card-title>Piesocket</v-card-title>
           <iframe
@@ -12,7 +12,7 @@
           ></iframe>
         </v-card>
       </v-col>
-      <v-col>
+      <v-col cols="12" md="6">
         <v-card min-height="400px">
           <v-card-title>Websocket</v-card-title>
           <iframe

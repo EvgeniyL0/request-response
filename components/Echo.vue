@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
+      <v-col cols="12" sm="6">
         <PiesocketLog />
       </v-col>
-      <v-col>
+      <v-col cols="12" sm="6">
         <WebsocketLog />
       </v-col>
     </v-row>
