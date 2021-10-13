@@ -1,6 +1,6 @@
 <template>
   <v-card min-height="400px">
-    <v-card-title>Connection to "piesocket.com" log:</v-card-title>
+    <v-card-title :class="textSize">Connection to "piesocket.com" log:</v-card-title>
     <v-card-text>
       <p v-for="(item, i) in log" :key="i">{{ item }}</p>
     </v-card-text>
@@ -18,6 +18,15 @@ export default {
     return {
       log: []
     };
+  },
+  computed: {
+    textSize() {
+      if (this.$vuetify.breakpoint.name === "xs") {
+        return "text-body-1";
+      } else {
+        return "text-h6";
+      }
+    }
   },
   created() {
     const piesocket = new WebSocket(
