@@ -4,7 +4,9 @@
     <v-spacer></v-spacer>
     <v-menu left bottom min-width="150px">
       <template v-slot:activator="{ on, attrs }">
-        <v-app-bar-nav-icon v-bind="attrs" v-on="on"></v-app-bar-nav-icon>
+        <v-btn dark icon v-bind="attrs" v-on="on">
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>
       </template>
       <v-list>
         <v-list-item link @click="$store.commit('setCurrentComponent', 'Echo')">
